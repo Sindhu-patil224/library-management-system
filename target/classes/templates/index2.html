@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Library Management System</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    background-color:#f4f6f8;
+    text-align:center;
+}
+
+h1{
+    color:#2c3e50;
+}
+
+form{
+    background:white;
+    padding:20px;
+    width:300px;
+    margin:auto;
+    border-radius:10px;
+    box-shadow:0px 0px 10px #ccc;
+}
+
+input{
+    width:80%;
+    padding:8px;
+}
+
+button{
+    background:#3498db;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+button:hover{
+    background:#2980b9;
+}
+
+table{
+    margin:auto;
+    margin-top:30px;
+    border-collapse:collapse;
+    width:70%;
+    background:white;
+}
+
+th{
+    background:#2c3e50;
+    color:white;
+    padding:10px;
+}
+
+td{
+    padding:10px;
+}
+
+a{
+    text-decoration:none;
+    color:#3498db;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Library Management System</h1>
+
+<h2>Add Book</h2>
+
+<form action="/add" method="post">
+
+Title:<br>
+<input type="text" name="title" required>
+
+<br><br>
+
+Author:<br>
+<input type="text" name="author" required>
+
+<br><br>
+
+<button type="submit">Add Book</button>
+
+</form>
+
+<hr>
+
+<h2>Books</h2>
+
+<table border="1">
+
+<tr>
+<th>ID</th>
+<th>Title</th>
+<th>Author</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<tr th:each="b : ${books}">
+
+<td th:text="${b.id}"></td>
+<td th:text="${b.title}"></td>
+<td th:text="${b.author}"></td>
+<td th:text="${b.status}"></td>
+
+<td>
+<a th:href="@{/issue/{id}(id=${b.id})}">Issue</a> |
+<a th:href="@{/return/{id}(id=${b.id})}">Return</a>
+</td>
+
+</tr>
+
+</table>
+
+</body>
+</html>
